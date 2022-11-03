@@ -28,12 +28,14 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Repositories\" />
     <None Remove="Controllers\" />
+    <None Remove="Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="DataAccess\" />
     <Folder Include="Repositories\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />

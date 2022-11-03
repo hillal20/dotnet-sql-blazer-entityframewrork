@@ -2,9 +2,7 @@
 using ShoppingCardAPI.DataAccess;
 using ShoppingCardAPI.Repositories.Contracts;
 using ShoppingCardAPI.Repositories;
-
-
-
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +30,11 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 
+////////////////////////////////////// regestring shopping cart  respository to the dependecy injection CDN  ///////////////
+///
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -39,12 +42,6 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 
-
-
-
-/// <summary>
-/// 
-/// </summary>
 
 var app = builder.Build();
 
@@ -54,6 +51,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// to open the cross origin  http calls 
+app.UseCors(policy => policy
+                      .WithOrigins("https://localhost:7075", "http://localhost:7075")
+                      .AllowAnyMethod()
+                      .WithHeaders(HeaderNames.ContentType)
+           );
+
+    
 
 app.UseHttpsRedirection();
 

@@ -14,5 +14,16 @@
 
   <ItemGroup>
     <None Remove="NuGet.PackageManagement" />
+    <None Remove="Services\" />
+    <None Remove="Services\Contracts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\Contracts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopOnlineModules\ShopOnlineModules.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

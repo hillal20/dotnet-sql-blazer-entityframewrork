@@ -1,9 +1,9 @@
 ﻿using System;
 namespace ShopOnlineModules.DTOS
 {
-    public class CartITemToAddDTO
+    public class CartItemToAddDTO
     {
-        public CartITemToAddDTO()
+        public CartItemToAddDTO()
         {
         }
 

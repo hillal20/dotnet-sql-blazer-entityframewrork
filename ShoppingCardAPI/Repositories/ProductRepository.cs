@@ -19,10 +19,15 @@ namespace ShoppingCardAPI.Repositories
 
 
 
-        // implementing the the PoductRepository interface 
-        public Task<Product> GetItem(int id)
+        ////////////////////////////////////////////////  implementing the the PoductRepository interface
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        public async Task<Product> GetItem(int id)
         {
-            throw new NotImplementedException();
+            var product = await repository.products.FindAsync(id);
+            return product!;
         }
 
         public async Task<IEnumerable<Product>> GetItems()
@@ -38,9 +43,12 @@ namespace ShoppingCardAPI.Repositories
             return allCategories;
         }
 
-        public Task<ProductCategory> ProductCategory(int id)
+
+
+        public async Task<ProductCategory> ProductCategory(int id)
         {
-            throw new NotImplementedException();
+            var productCategory = await repository.productsCategories.SingleOrDefaultAsync(c => c.Id == id);
+            return productCategory!;
         }
     }
 }

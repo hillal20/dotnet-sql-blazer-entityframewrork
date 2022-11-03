@@ -1,0 +1,63 @@
+﻿
+@*the following "/" means that this the url *@
+@page "/"
+
+
+@* the inherit key word means that the code will inherit from the ComopentBase class *@
+@inherits ProductsBase
+
+<PageTitle>Products</PageTitle>
+
+@if(Products == null)
+ {
+        <LoadingSpinner/>
+ }
+else
+{
+        <h3> Products </h3>
+        var productsCount = Products.Count();
+        @if(productsCount > 0)
+         {
+
+
+
+                ///////////////////// we can display the products using the logic of 4 items per row
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///
+
+                const int itemsPerRow = 4;
+                var productsPerRowList = new List<ProductDTO>();
+                @for (int i = 0; i < productsCount; i++)
+                    {
+                        productsPerRowList = Products.Skip(i * itemsPerRow).Take(itemsPerRow).ToList();
+
+                    <!--<div class="row mt-3">-->
+                        @* the next part could be reusable code therefor we could move it to the DisplayProducts.razor and we can pass it as a child component*@
+                        <!--<DisplayProducts Products="@productsPerRowList"></DisplayProducts>
+                    </div>-->
+                }
+
+                //////////////////// we can group them by category and we display them
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///
+
+                var productsGroupedByCategory = from product in Products
+                                                group product by product.CategoryId into groupedProducts
+                                                orderby groupedProducts.Key
+                                                select groupedProducts;
+
+                @foreach ( var groupedProd in productsGroupedByCategory ) {
+
+                     <h4> @groupedProd.FirstOrDefault(pg => pg.CategoryId == groupedProd.Key)?.CategoryName</h4>
+                     <div class="row mt-3">
+                        @* the next part could be reusable code therefor we could move it to the DisplayProducts.razor and we can pass it as a child component*@
+                        <DisplayProducts Products="@groupedProd"/>
+                    </div>
+                    <hr class="mb-3"/>
+                 }
+
+
+         }
+    }
+
+
